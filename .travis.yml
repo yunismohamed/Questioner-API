@@ -1,13 +1,12 @@
 language: python
 python:
-  - "3.6"
+  - "3.6.5"
 install:
   - pip install pytest
   - pip install pytest-cov
   - pip install coveralls
   - pip install -r requirements.txt
 script:
-  - export FLASK_ENV=development
-  - py.test --cov
+  - pytest
 after_success:
   - coveralls
