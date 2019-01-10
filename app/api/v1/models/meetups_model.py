@@ -4,17 +4,19 @@ The meetups models are defined here"""
 
 from datetime import datetime
 
-ALL_MEETUPS = [] # DB of all meetups
+ALL_MEETUPS = []  # DB of all meetups
+
 
 class Meetup:
+
     """
-    Contains models for the meetups
-    """
+    Contains models for the meetups"""
+
     def __init__(self, topic, happeningOn, location, images, tags):
         """
         Initializes the meetup class
         """
-        self.id = len(MEETUPS)+1
+        self.id = len(ALL_MEETUPS)+1
         self.topic = topic
         self.happeningOn = happeningOn
         self.location = location
@@ -26,17 +28,15 @@ class Meetup:
         """
         Saves new meetup to to all meetups list and returns the details
         """
-        MEETUPS.append(self)
+        ALL_MEETUPS.append(self)
 
         # Returns the details of the new meetup
         return {
-            "id": meetup.id,
-            "topic": meetup.topic,
-            "haoppeningOn": meetup.happeningOn,
-            "location": meetup.location,
-            "images": meetup.images,
-            "tags": meetup.tags,
-            "created_at": meetup.created_at
+            "id": self.id,
+            "topic": self.topic,
+            "haoppeningOn": self.happeningOn,
+            "location": self.location,
+            "images": self.images,
+            "tags": self.tags,
+            "created_at": self.created_at
         }
-
-    
