@@ -11,7 +11,6 @@ def create_meetup():
     Function to create a meetup record
     """
     try:
-        id = request.get_json()['id']
         topic = request.get_json()['topic']
         happeningOn = request.get_json()['happeningOn']
         location = request.get_json()['location']
