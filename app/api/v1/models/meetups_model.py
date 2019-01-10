@@ -10,20 +10,33 @@ class Meetup:
     """
     Contains models for the meetups
     """
-    def __init__(self, topic, meetup_date, location, images, tags):
+    def __init__(self, topic, happeningOn, location, images, tags):
         """
         Initializes the meetup class
         """
         self.id = len(MEETUPS)+1
         self.topic = topic
-        self.meetup_date = meetup_date
+        self.happeningOn = happeningOn
         self.location = location
         self.images = images
         self.tags = tags
         self.created_at = datetime.now()
 
-    def save_meetup(self):
+    def add_meetup_record(self):
         """
-        saves new meetup to to all meetups list
+        Saves new meetup to to all meetups list and returns the details
         """
         MEETUPS.append(self)
+
+        # Returns the details of the new meetup
+        return {
+            "id": meetup.id,
+            "topic": meetup.topic,
+            "haoppeningOn": meetup.happeningOn,
+            "location": meetup.location,
+            "images": meetup.images,
+            "tags": meetup.tags,
+            "created_at": meetup.created_at
+        }
+
+    

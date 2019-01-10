@@ -23,6 +23,7 @@ def create_meetup():
 
     if not topic:
         return jsonify({'status':400, 'error':'Missing topic field'}), 400
+
     if not happeningOn:
         return jsonify({'status':400, 'error':'Missing happeningOn field'}), 400
 
@@ -31,5 +32,7 @@ def create_meetup():
 
     if not tags:
         return jsonify({'status':400, 'error':'Missing tags field'}), 400
+
+        
 
 
