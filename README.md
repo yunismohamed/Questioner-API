@@ -6,7 +6,7 @@ API endpoints for Questioner- an application to crowd-source questions for a mee
 [![Coverage Status](https://coveralls.io/repos/github/yunismohamed/Questioner-API/badge.svg)](https://coveralls.io/github/yunismohamed/Questioner-API)
 
 
-## Here is a list endpoints
+## Here is a list of endpoints
 | Method        |       Endpoint                              |         Description                           |
 | ------------- |       -------------                         |         -------------                         |
 | `GET`         | `/api/v1/meetups/upcoming`                  |   Gets all meetups records                    |
