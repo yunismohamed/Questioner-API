@@ -4,8 +4,6 @@ App is created here
 
 from flask import Flask
 
-# Local import
-from instance.config import app_config
 
 from .api.v1.views.meetups_view import v1
 
