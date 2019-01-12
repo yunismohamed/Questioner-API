@@ -15,11 +15,18 @@ class BaseTest(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.client = self.app.test_client()
-        self.meetup = {
+        self.meetup1 = {
             "topic": "Data Science Meetup, Nairobi",
             "location": "Nairobi",
             "images": ["datascience.png", "python.png"],
             "happeningOn": "Tuesday 1 2015",
+            "tags": ["data", "python"]
+        }
+        self.meetup2 = {
+            "topic": "Flask Restful",
+            "location": "Nairobi",
+            "images": ["flask.png", "flask-restful.png"],
+            "happeningOn": "Tuesday 2 2018",
             "tags": ["data", "python"]
         }
 
@@ -32,7 +39,7 @@ class TestMeetups(BaseTest):
         """Function to test creation of a meetup record"""
         url = '/api/v1/meetups'
 
-        response = self.client.post(url, data=json.dumps(self.meetup),
+        response = self.client.post(url, data=json.dumps(self.meetup1),
                                     content_type="application/json")
         result = json.loads(response.data.decode('UTF-8'))
 
@@ -47,5 +54,8 @@ class TestMeetups(BaseTest):
             }
         ])
 
+    
+
+       
 if __name__ == '__main__':
     unittest.main()
