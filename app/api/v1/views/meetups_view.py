@@ -7,6 +7,8 @@ from app.api.v1.models.meetups_model import Meetup
 
 v1 = Blueprint('v1', __name__, url_prefix='/api/v1')
 
+meetups_db = Meetup()
+
 
 @v1.route("/meetups", methods=['POST'])
 def create_meetup():
@@ -37,18 +39,16 @@ def create_meetup():
     if not tags:
         return jsonify({'status': 400, 'error': 'Missing tags field'}), 400
 
-    new_meetup = Meetup(
-        topic=topic,
-        happeningOn=happeningOn,
-        location=location,
-        images=images,
-        tags=tags
-    )
-
-    new_meetup.add_meetup_record()
+    meetups_db.add_meetup_record(topic, happeningOn, location, images, tags)
 
     return jsonify({"status": 201,
                     "data": [{"topic": topic,
                               "location": location,
                               "happeningOn": happeningOn,
                               "tags": tags}]}), 201
+
+
+
+
+
+    
