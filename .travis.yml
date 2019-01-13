@@ -5,8 +5,9 @@ install:
   - pip install pytest
   - pip install pytest-cov
   - pip install coveralls
+  - pip install codecov
   - pip install -r requirements.txt
 script:
-  - pytest
+  - py.test --cov=app/tests/v1
 after_success:
-  - coveralls
+  - codecov --token=54348b92-7393-401c-8d60-f8f8449c1674

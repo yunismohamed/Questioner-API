@@ -3,6 +3,7 @@ API endpoints for Questioner- an application to crowd-source questions for a mee
 
 [![Build Status](https://travis-ci.org/yunismohamed/Questioner-API.svg?branch=develop)](https://travis-ci.org/yunismohamed/Questioner-API)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1d7f1df20f65e92518c3/maintainability)](https://codeclimate.com/github/yunismohamed/Questioner-API/maintainability)
+[![codecov](https://codecov.io/gh/yunismohamed/Questioner-API/branch/develop/graph/badge.svg)](https://codecov.io/gh/yunismohamed/Questioner-API)
 [![Coverage Status](https://coveralls.io/repos/github/yunismohamed/Questioner-API/badge.svg)](https://coveralls.io/github/yunismohamed/Questioner-API)
 
 
