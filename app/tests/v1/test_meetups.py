@@ -45,14 +45,7 @@ class TestMeetups(BaseTest):
 
         self.assertEqual(response.status_code, 201)
         self.assertEqual(result["status"], 201)
-        self.assertEqual(result["data"], [
-            {
-                "topic": "Data Science Meetup, Nairobi",
-                "location": "Nairobi",
-                "happeningOn": "Tuesday 1 2015",
-                "tags": ["data", "python"]
-            }
-        ])
+        self.assertIn("Data Science Meetup, Nairobi", str(result["data"]))
 
     def test_fetch_all_upcoming_meetups(self):
         """Function to test API can fetch all upcoming meetups"""
@@ -68,6 +61,25 @@ class TestMeetups(BaseTest):
         # Fetch all meetups
         get_all_response = self.client.get(all_meetups_url)
         self.assertEqual(get_all_response.status_code, 200)
+
+    def test_get_specific_meetup_record(self):
+        """Function to test API can fetch specific meetup record"""
+
+        # Post meetup2
+        post_response = self.client.post('/api/v1/meetups',
+                                         data=json.dumps(self.meetup2),
+                                         content_type="application/json")
+        self.assertEqual(post_response.status_code, 201)
+
+        get_meetup_id_response = self.client.get('/api/v1/meetups/2')
+        self.assertEqual(get_meetup_id_response.status_code, 200)
+        self.assertIn("Flask Restful", str(get_meetup_id_response.data))
+
+
+
+
+
+
 
        
 if __name__ == '__main__':

@@ -7,7 +7,7 @@ from app.api.v1.models.meetups_model import Meetup
 
 v1 = Blueprint('v1', __name__, url_prefix='/api/v1')
 
-meetups_db = Meetup()
+meetups_obj = Meetup()
 
 
 @v1.route("/meetups", methods=['POST'])
@@ -39,7 +39,7 @@ def create_meetup():
     if not tags:
         return jsonify({'status': 400, 'error': 'Missing tags field'}), 400
 
-    meetups_db.add_meetup_record(topic, happeningOn, location, images, tags)
+    meetups_obj.add_meetup_record(topic, happeningOn, location, images, tags)
 
     return jsonify({"status": 201,
                     "data": [{"topic": topic,
@@ -53,14 +53,31 @@ def get_all_upcoming_meetups():
     """
     Function to fetch all upcoming meetups
     """
-    all_upcoming_meetups = meetups_db.fetch_all_upcoming_meetups()
+    all_upcoming_meetups = meetups_obj.fetch_all_upcoming_meetups()
 
     if len(all_upcoming_meetups) == 0:
         return jsonify({
             "status": 404,
             "error": "There are no meetups created."
-        }), 200
+        }), 404
     return jsonify({
         "status": 200,
         "data": all_upcoming_meetups
+    }), 200
+
+
+@v1.route("/meetups/<int:id>", methods=['GET'])
+def get_specific_meetup(id):
+    """
+    Function to fetch specific meetup
+    """
+    meetup = meetups_obj.fetch_specific_meetup(id)
+    if not meetup:
+        return jsonify({
+            "status": 404,
+            "error": "Meetup does not exist."
+        }), 404
+    return jsonify({
+        "status": 200,
+        "data": meetup
     }), 200
