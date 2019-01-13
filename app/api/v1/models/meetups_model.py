@@ -34,4 +34,8 @@ class Meetup:
        
         ALL_MEETUPS.append(new_meetup)
 
-
+    def fetch_all_upcoming_meetups(self):
+        """
+        Fetches all meetups from the DB 
+        """
+        return self.db
