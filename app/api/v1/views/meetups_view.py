@@ -48,7 +48,22 @@ def create_meetup():
                               "tags": tags}]}), 201
 
 
+@v1.route("/meetups/upcoming", methods=['GET'])
+def get_all_upcoming_meetups():
+    """
+    Function to fetch all upcoming meetups
+    """
+    all_upcoming_meetups = meetups_db.fetch_all_upcoming_meetups()
 
+    if len(all_upcoming_meetups) == 0:
+        return jsonify({
+            "status": 404,
+            "error": "There are no meetups created."
+        }), 200
+    return jsonify({
+        "status": 200,
+        "data": all_upcoming_meetups
+    }), 200
 
 
     
