@@ -69,7 +69,7 @@ def get_all_upcoming_meetups():
 @v1.route("/meetups/<int:id>", methods=['GET'])
 def get_specific_meetup(id):
     """
-    Function to fetch specific meetup 
+    Function to fetch specific meetup
     """
     meetup = meetups_obj.fetch_specific_meetup(id)
     if not meetup:
@@ -81,6 +81,3 @@ def get_specific_meetup(id):
         "status": 200,
         "data": meetup
     }), 200
-
-
-

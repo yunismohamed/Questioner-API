@@ -47,6 +47,3 @@ class Meetup:
         specific_meetup = [meetup for meetup in self.db if meetup['id'] == id]
 
         return specific_meetup
-
-    
-
