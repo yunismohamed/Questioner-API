@@ -39,3 +39,14 @@ class Meetup:
         Fetches all meetups from the DB
         """
         return self.db
+
+    def fetch_specific_meetup(self, id):
+        """
+        Fetches specific meetup by id from the DB
+        """
+        specific_meetup = [meetup for meetup in self.db if meetup['id'] == id]
+
+        return specific_meetup
+
+    
+
