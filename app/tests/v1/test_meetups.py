@@ -73,7 +73,7 @@ class TestMeetups(BaseTest):
 
         get_meetup_id_response = self.client.get('/api/v1/meetups/2')
         self.assertEqual(get_meetup_id_response.status_code, 200)
-        
+        self.assertIn("Flask Restful", str(get_meetup_id_response.data))
 
 
 
