@@ -64,6 +64,3 @@ def get_all_upcoming_meetups():
         "status": 200,
         "data": all_upcoming_meetups
     }), 200
-
-
-    
