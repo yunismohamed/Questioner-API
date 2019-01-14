@@ -18,5 +18,17 @@ class Questions:
         """
         self.db = ALL_QUESTIONS
 
-    def add_question(self, userid, meetupid, title, body):
-        pass
+    def add_question(self, createdBy, meetup, title, body):
+        """
+        Saves new question to to all questions DB
+        """
+        new_question = {
+            "id": len(self.db) + 1,
+            "createdOn": datetime.now(),
+            "createdBy": createdBy,
+            "meetup": meetup,
+            "title": title,
+            "body": body            
+        }
+
+        ALL_QUESTIONS.append(new_question)
