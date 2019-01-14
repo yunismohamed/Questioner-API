@@ -81,6 +81,24 @@ class TestMeetups(BaseTest):
         self.assertEqual(get_meetup_id_response.status_code, 200)
         self.assertIn("Flask Restful", str(get_meetup_id_response.data))
 
+    def test_create_question(self):
+        """
+        Function to test API can create a question 
+        for a specific meetup 
+        """
+        meetups_url = '/api/v1/meetups'
+        questions_url = '/api/v1/questions'
+        # Post meetup2
+        response = self.client.post(meetups_url, data=json.dumps(self.meetup2),
+                                    content_type="application/json")
+        # Test meetup2 was posted successfully
+        self.assertEqual(response.status_code, 201)
+        # Post a question1 for meetup2
+        questions_response = self.client.post(questions_url, data=json.dumps(self.question1),
+                                    content_type="application/json")
+        # Test question1 was posted successfully
+        self.assertEqual(questions_response.status_code, 201)
+        self.assertIn("Python Data Science", str(questions_response.data))
 
        
 if __name__ == '__main__':
