@@ -29,6 +29,12 @@ class BaseTest(unittest.TestCase):
             "happeningOn": "Tuesday 2 2018",
             "tags": ["data", "python"]
         }
+        self.question1 = {
+            "createdBy": 1,
+            "meetup": 1,
+            "title": "Python Data Science",
+            "body": "What are the best tutorials for python data science?"
+        }
 
 
 class TestMeetups(BaseTest):
@@ -74,11 +80,6 @@ class TestMeetups(BaseTest):
         get_meetup_id_response = self.client.get('/api/v1/meetups/2')
         self.assertEqual(get_meetup_id_response.status_code, 200)
         self.assertIn("Flask Restful", str(get_meetup_id_response.data))
-
-
-
-
-
 
 
        
