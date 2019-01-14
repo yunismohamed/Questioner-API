@@ -28,7 +28,7 @@ class Questions:
             "createdBy": createdBy,
             "meetup": meetup,
             "title": title,
-            "body": body            
+            "body": body
         }
 
         ALL_QUESTIONS.append(new_question)

@@ -9,6 +9,7 @@ questions_v1 = Blueprint('questions_v1', __name__, url_prefix='/api/v1')
 
 questions_obj = Questions()
 
+
 @questions_v1.route("/questions", methods=['POST'])
 def create_question():
     """
@@ -18,7 +19,7 @@ def create_question():
         createdBy = request.get_json()['createdBy']
         meetup = request.get_json()['meetup']
         title = request.get_json()['title']
-        body = request.get_json()['body']        
+        body = request.get_json()['body']
 
     except:
         return jsonify({'status': 400,
@@ -44,4 +45,3 @@ def create_question():
                               "meetup": meetup,
                               "title": title,
                               "body": body}]}), 201
-
