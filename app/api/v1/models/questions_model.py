@@ -17,3 +17,6 @@ class Questions:
         Initializes the questions class
         """
         self.db = ALL_QUESTIONS
+
+    def add_question(self, userid, meetupid, title, body):
+        pass
