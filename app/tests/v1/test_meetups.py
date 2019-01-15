@@ -33,7 +33,8 @@ class BaseTest(unittest.TestCase):
             "createdBy": 1,
             "meetup": 1,
             "title": "Python Data Science",
-            "body": "What are the best tutorials for python data science?"
+            "body": "What are the best tutorials for python data science?",
+            "votes": 0
         }
 
 
@@ -100,6 +101,24 @@ class TestMeetups(BaseTest):
         # Test question1 was posted successfully
         self.assertEqual(questions_response.status_code, 201)
         self.assertIn("Python Data Science", str(questions_response.data))
+
+    def test_upvote_question(self):
+        """
+        Function to test API can upvote a specific question
+        """
+        meetups_url = '/api/v1/meetups'
+        upvote_url = 'api/v1/questions/1/upvote'
+        # Post meetup2
+        response = self.client.post(meetups_url, data=json.dumps(self.meetup2),
+                                    content_type="application/json")
+        # Test meetup2 was posted successfully
+        self.assertEqual(response.status_code, 201)
+
+        upvote_response = self.client.patch(upvote_url,
+                                            content_type='application/json')
+
+        # Test the upvote patch was successful
+        self.assertEqual(upvote_response.status_code, 202)
 
 
 if __name__ == '__main__':
