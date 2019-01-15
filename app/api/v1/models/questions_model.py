@@ -36,11 +36,11 @@ class Questions:
 
     def upvote_question(self, id):
         question = [question for question in self.db if question["id"] == id]
-        
+
         if not question:
             return False
-        
-        question[0]["votes"] += 1   
+
+        question[0]["votes"] += 1
 
         return {
             "meetup": question[0]["meetup"],
@@ -48,5 +48,3 @@ class Questions:
             "body": question[0]["body"],
             "votes": question[0]["votes"]
         }
-
-        

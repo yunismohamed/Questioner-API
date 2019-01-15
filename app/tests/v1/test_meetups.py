@@ -114,9 +114,9 @@ class TestMeetups(BaseTest):
         # Test meetup2 was posted successfully
         self.assertEqual(response.status_code, 201)
 
-        upvote_response = self.client.patch(upvote_url,                                     
+        upvote_response = self.client.patch(upvote_url,
                                             content_type='application/json')
-        
+
         # Test the upvote patch was successful
         self.assertEqual(upvote_response.status_code, 202)
 

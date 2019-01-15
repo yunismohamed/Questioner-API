@@ -46,6 +46,7 @@ def create_question():
                               "title": title,
                               "body": body}]}), 201
 
+
 @questions_v1.route("/questions/<int:id>/upvote", methods=['PATCH'])
 def upvote_question(id):
     """
