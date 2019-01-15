@@ -48,3 +48,6 @@ class Questions:
             "body": question[0]["body"],
             "votes": question[0]["votes"]
         }
+
+    def downvote_question(self):
+        pass
