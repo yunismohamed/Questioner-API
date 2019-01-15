@@ -64,6 +64,7 @@ def upvote_question(id):
         "data": [upvoted_question]
     }), 202
 
+
 @questions_v1.route("/questions/<int:id>/downvote", methods=['PATCH'])
 def downvote_question(id):
     """
