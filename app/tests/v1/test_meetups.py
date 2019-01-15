@@ -36,7 +36,7 @@ class BaseTest(unittest.TestCase):
             "body": "What are the best tutorials for python data science?",
             "votes": 0
         }
-        self.rsvp = {            
+        self.rsvp = {
             "user_id": 1,
             "response": "yes"
         }
@@ -147,15 +147,19 @@ class TestMeetups(BaseTest):
         Function to test API can set rsvp status for a meetup
         """
         meetups_url = '/api/v1/meetups'
-        rsvp_url = 'api/v1/questions/2/rsvps'
+        rsvp_url = 'api/v1/meetups/2/rsvps'
         # Post meetup2
         response = self.client.post(meetups_url, data=json.dumps(self.meetup2),
                                     content_type="application/json")
         # Test meetup2 was posted successfully
         self.assertEqual(response.status_code, 201)
 
-        rsvp_response = self.client.post(rsvp_url, content_type='application/json')
+        # Post rsvp
+        rsvp_response = self.client.post(rsvp_url, data=json.dumps(self.rsvp),
+                                         content_type='application/json')
 
+        # Test rsvp was set successfully
+        self.assertEqual(rsvp_response.status_code, 201)
 
 
 if __name__ == '__main__':
