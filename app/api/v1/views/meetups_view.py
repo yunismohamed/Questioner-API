@@ -11,6 +11,7 @@ v1 = Blueprint('v1', __name__, url_prefix='/api/v1')
 meetups_obj = Meetup()
 rsvp_obj = Rsvp()
 
+
 @v1.route("/meetups", methods=['POST'])
 def create_meetup():
     """
@@ -87,21 +88,21 @@ def get_specific_meetup(id):
 @v1.route('/meetups/<int:id>/rsvps', methods=['POST'])
 def add_rsvp(id):
     '''Adds RSVP for a meetup for a specific user'''
-    
+
     meetup = meetups_obj.fetch_specific_meetup(id=id)
-    
+
     if not meetup:
         return jsonify({
             "status": 404,
             "error": "Meetup does not exist."
         }), 404
 
-    meetup_id = meetup["id"]
-    topic = meetup["topic"]    
+    meetup_id = meetup[0]["id"]
+    topic = meetup[0]["topic"]
 
     try:
         user_id = request.get_json()['user_id']
-        response = request.get_json()['response']        
+        response = request.get_json()['response']
 
     except:
         return jsonify({'status': 400,
@@ -110,7 +111,8 @@ def add_rsvp(id):
     if not user_id:
         return jsonify({'status': 400, 'error': 'Missing user id field'}), 400
     if not response:
-        return jsonify({'status': 400, 'error': 'Missing rsvp response field'}), 400
+        return jsonify({'status': 400,
+                        'error': 'Missing rsvp response field'}), 400
 
     rsvp_obj.set_rsvp(meetup_id, user_id, response)
 
@@ -119,9 +121,6 @@ def add_rsvp(id):
                 'data': [{
                     "meetup": meetup_id,
                     "topic": topic,
-                    "status": response 
+                    "status": response
                 }]
             }), 201
-    
-    
-
