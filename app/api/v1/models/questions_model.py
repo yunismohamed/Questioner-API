@@ -49,5 +49,17 @@ class Questions:
             "votes": question[0]["votes"]
         }
 
-    def downvote_question(self):
-        pass
+    def downvote_question(self, id):
+        question = [question for question in self.db if question["id"] == id]
+
+        if not question:
+            return False
+
+        question[0]["votes"] -= 1
+
+        return {
+            "meetup": question[0]["meetup"],
+            "title": question[0]["title"],
+            "body": question[0]["body"],
+            "votes": question[0]["votes"]
+        }
