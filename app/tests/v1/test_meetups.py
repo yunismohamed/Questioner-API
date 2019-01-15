@@ -33,7 +33,8 @@ class BaseTest(unittest.TestCase):
             "createdBy": 1,
             "meetup": 1,
             "title": "Python Data Science",
-            "body": "What are the best tutorials for python data science?"
+            "body": "What are the best tutorials for python data science?",
+            "votes": 0
         }
 
 
