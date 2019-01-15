@@ -36,6 +36,12 @@ class BaseTest(unittest.TestCase):
             "body": "What are the best tutorials for python data science?",
             "votes": 0
         }
+        self.rsvp = {
+            "id": 1,
+            "meetup": 2,
+            "user": 1,
+            "response": "yes"
+        }
 
 
 class TestMeetups(BaseTest):
