@@ -32,3 +32,6 @@ class Questions:
         }
 
         ALL_QUESTIONS.append(new_question)
+
+    def upvote_question(self):
+        pass
