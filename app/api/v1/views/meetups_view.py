@@ -4,11 +4,12 @@ Responses to requests regarding meetups are set up here"""
 from flask import Blueprint, request, jsonify
 
 from app.api.v1.models.meetups_model import Meetup
+from app.api.v1.models.rsvp_model import Rsvp
 
 v1 = Blueprint('v1', __name__, url_prefix='/api/v1')
 
 meetups_obj = Meetup()
-
+rsvp_obj = Rsvp()
 
 @v1.route("/meetups", methods=['POST'])
 def create_meetup():
@@ -81,3 +82,46 @@ def get_specific_meetup(id):
         "status": 200,
         "data": meetup
     }), 200
+
+
+@v1.route('/meetups/<int:id>/rsvps', methods=['POST'])
+def add_rsvp(id):
+    '''Adds RSVP for a meetup for a specific user'''
+    
+    meetup = meetups_obj.fetch_specific_meetup(id=id)
+    
+    if not meetup:
+        return jsonify({
+            "status": 404,
+            "error": "Meetup does not exist."
+        }), 404
+
+    meetup_id = meetup["id"]
+    topic = meetup["topic"]    
+
+    try:
+        user_id = request.get_json()['user_id']
+        response = request.get_json()['response']        
+
+    except:
+        return jsonify({'status': 400,
+                        'error': 'Invalid request format!'}), 400
+
+    if not user_id:
+        return jsonify({'status': 400, 'error': 'Missing user id field'}), 400
+    if not response:
+        return jsonify({'status': 400, 'error': 'Missing rsvp response field'}), 400
+
+    rsvp_obj.set_rsvp(meetup_id, user_id, response)
+
+    return jsonify({
+                'status': 201,
+                'data': [{
+                    "meetup": meetup_id,
+                    "topic": topic,
+                    "status": response 
+                }]
+            }), 201
+    
+    
+
