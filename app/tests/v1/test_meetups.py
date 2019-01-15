@@ -120,6 +120,24 @@ class TestMeetups(BaseTest):
         # Test the upvote patch was successful
         self.assertEqual(upvote_response.status_code, 202)
 
+    def test_downvote_question(self):
+        """
+        Function to test API can downvote a specific question
+        """
+        meetups_url = '/api/v1/meetups'
+        downvote_url = 'api/v1/questions/1/downvote'
+        # Post meetup2
+        response = self.client.post(meetups_url, data=json.dumps(self.meetup2),
+                                    content_type="application/json")
+        # Test meetup2 was posted successfully
+        self.assertEqual(response.status_code, 201)
+
+        downvote_response = self.client.patch(downvote_url,
+                                              content_type='application/json')
+
+        # Test the downvote patch was successful
+        self.assertEqual(downvote_response.status_code, 202)
+
 
 if __name__ == '__main__':
     unittest.main()
