@@ -14,3 +14,6 @@ class Rsvp:
         Initializes the rsvp class
         """
         self.db = RSVP
+
+    def set_rsvp(self, *args):
+        pass
