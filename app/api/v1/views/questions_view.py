@@ -45,3 +45,20 @@ def create_question():
                               "meetup": meetup,
                               "title": title,
                               "body": body}]}), 201
+
+@questions_v1.route("/questions/<int:id>/upvote", methods=['PATCH'])
+def upvote_question(id):
+    """
+    Function to upvote a question
+    """
+    upvoted_question = questions_obj.upvote_question(id=id)
+
+    if not upvoted_question:
+        return jsonify({
+                "status": 404,
+                "error": "Question not found"
+            }), 404
+    return jsonify({
+        "status": 202,
+        "data": [upvoted_question]
+    }), 202
