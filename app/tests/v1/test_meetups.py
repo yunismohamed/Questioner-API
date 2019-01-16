@@ -40,6 +40,14 @@ class BaseTest(unittest.TestCase):
             "user_id": 1,
             "response": "yes"
         }
+        self.new_user = {
+            "firstname": "Yunis",
+            "lastname": "Abdi",
+            "username": "yunis1",
+            "email": "yunis1@gmail.com",
+            "password": "yunis1000",           
+            "role": "Admin"
+        }
 
 
 class TestMeetups(BaseTest):
@@ -160,6 +168,15 @@ class TestMeetups(BaseTest):
 
         # Test rsvp was set successfully
         self.assertEqual(rsvp_response.status_code, 201)
+    
+    def test_signup(self):
+        """
+        Function to test API signup a new user
+        """
+        response = self.client.post('/api/v1/auth/signup',
+                                    data=json.dumps(self.new_user),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 201)    
 
 
 if __name__ == '__main__':
