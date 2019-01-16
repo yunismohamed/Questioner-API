@@ -95,3 +95,41 @@ def signup():
             "role": role
         }]
     })), 201
+
+
+@auth.route('/login', methods=['POST'])
+def login():
+    """
+    Allows a user to login
+    """
+
+    try:
+        username = request.get_json()['username']
+        password = request.get_json()['password']
+    except:
+        return jsonify({'status': 400,
+                        'error': 'Invalid request format!'}), 400
+
+    if not username:
+        return jsonify({
+            "status": 400,
+            "error": "Username is missing!"
+        }), 400
+    if not password:
+        return jsonify({
+            "status": 400,
+            "error": "Password is missing!"
+        }), 400
+
+    # Check if the user exists
+    valid_user = user_obj.check_user(username, password)
+
+    if not valid_user:
+        return jsonify({
+            "status": 400,
+            "error": "Username does not exist or incorrect password"
+        }), 400
+    return jsonify({
+                "status": 200,
+                "message": f"Successfully logged in as {username}"
+        }), 200

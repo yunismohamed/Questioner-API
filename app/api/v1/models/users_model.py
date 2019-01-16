@@ -1,3 +1,6 @@
+import re
+from werkzeug.security import generate_password_hash, check_password_hash
+
 """
 The users models are defined here"""
 
@@ -29,3 +32,13 @@ class Users:
         }
 
         ALL_USERS.append(new_user)
+
+    def check_user(self, username, password):
+        """
+        Checks whether the username and password match"""
+        user = [user for user in self.db if user['username'] == username]
+        if user:
+            if check_password_hash(user[0]["password"], password):
+                return True
+            return False
+        return False

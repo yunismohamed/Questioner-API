@@ -40,13 +40,25 @@ class BaseTest(unittest.TestCase):
             "user_id": 1,
             "response": "yes"
         }
-        self.new_user = {
+        self.new_user1 = {
             "firstname": "Yunis",
             "lastname": "Abdi",
             "username": "yunis1",
             "email": "yunis1@gmail.com",
-            "password": "yunis1000",           
+            "password": "yunis1000",
             "role": "Admin"
+        }
+        self.new_user2 = {
+            "firstname": "Abdi",
+            "lastname": "Moha",
+            "username": "moha1",
+            "email": "moha1@gmail.com",
+            "password": "moha123",
+            "role": "Admin"
+        }
+        self.login_details = {
+            "username": "moha1",
+            "password": "moha123"
         }
 
 
@@ -168,15 +180,31 @@ class TestMeetups(BaseTest):
 
         # Test rsvp was set successfully
         self.assertEqual(rsvp_response.status_code, 201)
-    
+
     def test_signup(self):
         """
         Function to test API signup a new user
         """
         response = self.client.post('/api/v1/auth/signup',
-                                    data=json.dumps(self.new_user),
+                                    data=json.dumps(self.new_user1),
                                     content_type='application/json')
-        self.assertEqual(response.status_code, 201)    
+        self.assertEqual(response.status_code, 201)
+
+    def test_login(self):
+        """
+        Function to test API login a registered user
+        """
+        # Signup a user
+        response = self.client.post('/api/v1/auth/signup',
+                                    data=json.dumps(self.new_user2),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 201)
+
+        # Test user login
+        response = self.client.post('/api/v1/auth/login',
+                                    data=json.dumps(self.login_details),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
 
 
 if __name__ == '__main__':
