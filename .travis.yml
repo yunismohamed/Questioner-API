@@ -8,6 +8,6 @@ install:
   - pip install codecov
   - pip install -r requirements.txt
 script:
-  - py.test --cov=app/tests/v1
+  - py.test --cov=app/api app/tests
 after_success:
   - codecov --token=54348b92-7393-401c-8d60-f8f8449c1674
