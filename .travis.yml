@@ -7,6 +7,12 @@ install:
   - pip install coveralls
   - pip install codecov
   - pip install -r requirements.txt
+env: 
+  - export TEST_DATABASE_URL="dbname='test_questioner' host='127.0.0.1' port='5432' user='postgres' password=''"
+services:
+  - postgresql
+before_script:
+  - psql -c 'CREATE DATABASE questioner;' -U postgres  
 script:
   - py.test --cov=app/api app/tests
 after_success:
